@@ -1,7 +1,7 @@
 name: Simple Specific Branch
 run-name: ${{ github.actor }} is deploying to production on a friday!
 on:
-  pull_request:
+  push:
     branches:
       - production
 jobs:
