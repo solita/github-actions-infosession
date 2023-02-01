@@ -21,7 +21,10 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  NO-deploy-friday:
-    uses: gbougakov/no-deploy-friday@v1
-    with:
-      timezone: 'Europe/Moscow'
+  reusable_workflow_job:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: gbougakov/no-deploy-friday@v1
+        with:
+          timezone: 'Europe/Moscow'
