@@ -22,6 +22,8 @@ TODO List for the demo:
   * [ ] On Path
   * [ ] On Label
   * [ ] On A Specific Branch
+
+  * [ ] On Label
 * [ ] A workflow showcasing:
 
   * [ ] IF/Else flows

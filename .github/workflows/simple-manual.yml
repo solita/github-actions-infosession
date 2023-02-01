@@ -1,6 +1,7 @@
 name: Simple Action on manual trigger
 run-name: ${{ github.actor }} is testing out GitHub Actions Manually🚀
-on: [manual]
+on:
+  workflow_dispatch:
 jobs:
   Simple_manual_trigger:
     runs-on: ubuntu-latest

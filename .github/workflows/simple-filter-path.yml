@@ -1,6 +1,9 @@
 name: Simple Action on filtered path
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [manual]
+on:
+  push:
+    paths:
+      - 'site_source/**'
 jobs:
   Explore-GitHub-Actions:
     runs-on: ubuntu-latest
