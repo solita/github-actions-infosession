@@ -12,21 +12,20 @@ TODO List for the demo:
 * [ ] A small docker app with some tests.
 * [ ] An action that that fails if the tests fail.
 * [ ] A publishable shared action that can be reused in here.
-* [ ] A demo on code linting.
 * [X] A demo on triggers:
 
   * [X] On Push
-  * [X] On Merge
+  * [X] On Merge `url -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash`
   * [X] On Manual Triger
   * [X] On Schedule
   * [X] On Path
   * [X] On Label
   * [X] On A Specific Branch
-* [ ] A workflow showcasing:
+* [X] A workflow showcasing:
 
-  * [ ] IF/Else flows
-  * [ ] Paralellism
-  * [ ] Dependent steps
-  * [ ] concurrency limits
+  * [X] IF/Else flows
+  * [X] Paralellism
+  * [X] Dependent steps
+  * [X] concurrency limits
 * [ ] Secrets Management
 * [ ] How to go to prod?
