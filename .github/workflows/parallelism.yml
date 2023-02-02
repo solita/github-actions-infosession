@@ -79,6 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: 
     - Run_Development_Tests
+    - Deploy_Artifact_to_Storage
     - Warn_Change_Management
     environment: production
     steps:
