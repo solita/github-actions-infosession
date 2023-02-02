@@ -1,8 +1,13 @@
 name: Production demo showcasing paralellism
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
 jobs:
-  job-1:
+  Setup_Codebase:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -17,7 +22,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  job-2:
+  Install_Dependencies:
     runs-on: ubuntu-latest
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -32,7 +37,7 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  job-3:
+  Run_Development_Tests:
     runs-on: ubuntu-latest
     environment: development
     steps:
@@ -50,9 +55,9 @@ jobs:
       - run: echo "Want to know my variable? It's ${{vars.REPO_VARIABLE}}" => based on the repo
       - run: echo "Let me tell you a little secret! ${{secrets.REPO_SECRET}}" => based on the repo
 
-  job-4:
+  Build_Production_Artifact:
     runs-on: ubuntu-latest
-    needs: job-3
+    needs: Run_Development_Tests
     environment: production
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
@@ -68,13 +73,12 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - run: echo "You know my variable? Now for the production environment this is ${{vars.REPO_VARIABLE}}"
 
-      
-
-  job-5:
+  Deploy_Artifact_to_Storage:
     runs-on: ubuntu-latest
     needs:
-    - job-2
-    - job-4
+    - Setup_Codebase
+    - Install_Dependencies
+    - Build_Production_Artifact
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -88,9 +92,9 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  job-6:
+  Trigger_Slack_API:
       runs-on: ubuntu-latest
-      needs: job-3
+      needs: Run_Development_Tests
       steps:
         - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
         - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -104,9 +108,9 @@ jobs:
             ls ${{ github.workspace }}
         - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  job-7:
+  Warn_Change_Management:
     runs-on: ubuntu-latest
-    needs: job-5
+    needs: Run_Development_Tests
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -120,11 +124,11 @@ jobs:
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
 
-  job-8:
+  Deploy_to_Production:
     runs-on: ubuntu-latest
     needs: 
-    - job-5
-    - job-7
+    - Run_Development_Tests
+    - Warn_Change_Management
     environment: production
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
