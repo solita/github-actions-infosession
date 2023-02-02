@@ -1,7 +1,7 @@
 name: Simple Specific Branch
 run-name: ${{ github.actor }} is deploying to production on a friday!
 on:
-  pull_request:
+  push:
     branches:
       - production
 jobs:
@@ -21,7 +21,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-  reusable_workflow_job:
+  Is_it_friday:
     runs-on: ubuntu-latest
     environment: production
     steps:
