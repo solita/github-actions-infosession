@@ -39,7 +39,7 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: echo "Want to know my variable "REPO_VARIABLE"? It's ${{vars.REPO_VARIABLE}}" => based on the repo
+      - run: echo "Want to know my variable "REPO_VARIABLE"? It's '${{vars.REPO_VARIABLE}}'" => based on the repo
       - run: echo "Let me tell you a little secret "REPO_SECRET"! ${{secrets.REPO_SECRET}}" => based on the repo
 
   Warn_Change_Management:
@@ -51,7 +51,7 @@ jobs:
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - run: echo "You know my variable "REPO_VARIABLE"? Now for the production environment this is ${{vars.REPO_VARIABLE}}"
+      - run: echo "You know my variable "REPO_VARIABLE"? Now for the production environment this is '${{vars.REPO_VARIABLE}}'"
 
   Build_Production_Artifact:
     runs-on: ubuntu-latest
